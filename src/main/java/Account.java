@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.*;
 
 
 enum CurTypes {GOLD, USD, EUR, RUB}
@@ -10,7 +9,7 @@ public class Account {
     private HashMap<CurTypes,Integer> currency;
 
 
-    private Account(){};
+    private Account(){}
 
     public Account(String name)
     {
