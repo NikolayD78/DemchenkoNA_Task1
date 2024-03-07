@@ -46,7 +46,7 @@ public class UnitTest {
         Account acc1 = new Account("Qwerty");
         Assertions.assertThrows(IllegalArgumentException.class,()->acc1.setTypeAccount(null));
         acc1.setTypeAccount(TypesAccount.PREMIAL);
-        Assertions.assertEquals(acc1.typeAccount,TypesAccount.PREMIAL);
+        Assertions.assertEquals(acc1.getTypeAccount(),TypesAccount.PREMIAL);
     }
 
     @org.junit.jupiter.api.Test
@@ -75,7 +75,7 @@ public class UnitTest {
         // блок проверки отката изменения типа счета
         acc1.setTypeAccount(TypesAccount.PREMIAL);
         acc1.undo();
-        Assertions.assertEquals(acc1.typeAccount,TypesAccount.USUAL);
+        Assertions.assertEquals(acc1.getTypeAccount(),TypesAccount.USUAL);
 
     }
 

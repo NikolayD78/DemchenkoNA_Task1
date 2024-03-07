@@ -11,7 +11,7 @@ public class Account {
 
     private String name;
     private HashMap<CurTypes,Integer> currency;
-    TypesAccount typeAccount;
+    private TypesAccount typeAccount;
 
     private Deque<Command> commands = new ArrayDeque<>();
 
@@ -51,8 +51,7 @@ public class Account {
 
     public TypesAccount getTypeAccount()
     {
-        TypesAccount currTypeAccount=this.typeAccount;
-        return currTypeAccount;
+        return this.typeAccount;
     }
 
     public void printTypeAccount()
