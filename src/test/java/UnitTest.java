@@ -41,6 +41,7 @@ public class UnitTest {
 
     }
 
+    @org.junit.jupiter.api.Test
     void checkTypeAccount()
     {
         Account acc1 = new Account("Qwerty");

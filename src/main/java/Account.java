@@ -82,10 +82,10 @@ public class Account {
         this.currency.put(curtype,val);
     }
 
-    public  Account undo() throws NothingToUndo {
+    public void undo() throws NothingToUndo {
         if (commands.isEmpty()) throw new NothingToUndo();
         commands.pop().perform();
-        return this;
+
     }
 
     public void printAccSaldo()
