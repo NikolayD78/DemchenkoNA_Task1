@@ -6,6 +6,7 @@ class NothingToUndo extends Exception{}
 enum CurTypes {GOLD, USD, EUR, RUB}
 enum TypesAccount {USUAL,PREMIAL}
 interface Command{public void perform();}
+interface Loadable{void load();}
 
 public class Account {
 
@@ -14,6 +15,30 @@ public class Account {
     private TypesAccount typeAccount;
 
     private Deque<Command> commands = new ArrayDeque<>();
+    //>>---------------------------
+    public Loadable save() {return new Snapshot();}
+
+    private class Snapshot implements Loadable
+    {
+        private String name;
+        private HashMap<CurTypes, Integer> currency;
+        private TypesAccount typeAccount;
+
+        public Snapshot ()
+        {
+            this.name = Account.this.name;
+            this.currency = new HashMap<>(Account.this.currency);
+            this.typeAccount=Account.this.typeAccount;
+        }
+        @Override
+        public void load() {
+            Account.this.name = this.name;
+            Account.this.currency = new HashMap<>(this.currency);
+            Account.this.typeAccount = this.typeAccount;
+            Account.this.commands.clear(); // если восстановили, то Undo надо очистить полностью
+        }
+    }
+    //<<---------------------------
 
     private Account(){}
 

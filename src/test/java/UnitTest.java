@@ -80,5 +80,36 @@ public class UnitTest {
 
     }
 
+    @org.junit.jupiter.api.Test
+    void checkLoadSave() {
+        Account acc1 = new Account("Qwerty");
+        String oldName;
+        Loadable save1;
+        HashMap<CurTypes,Integer> hm1;
+        acc1.setName("Измененное имя 1");
+        acc1.setCurrency(CurTypes.EUR,5);
+        acc1.setCurrency(CurTypes.USD,10);
+        acc1.setTypeAccount(TypesAccount.PREMIAL);
+        oldName=acc1.getName();
+        hm1=acc1.getCurrency();
+        save1=acc1.save();
+        acc1.setName("Измененное имя 2");
+        acc1.setCurrency(CurTypes.USD,20);
+        acc1.setCurrency(CurTypes.RUB,7);
+        acc1.setTypeAccount(TypesAccount.USUAL);
+
+        Assertions.assertNotEquals(acc1.getName(),oldName);
+        Assertions.assertNotEquals(acc1.getCurrency(),hm1);
+        Assertions.assertNotEquals(acc1.getTypeAccount(),TypesAccount.PREMIAL);
+
+        save1.load();
+        Assertions.assertThrows(NothingToUndo.class,()->acc1.undo());
+
+        Assertions.assertEquals(acc1.getName(),oldName);
+        Assertions.assertEquals(acc1.getCurrency(),hm1);
+        Assertions.assertEquals(acc1.getTypeAccount(),TypesAccount.PREMIAL);
+
+    }
+
 
 }
